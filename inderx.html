@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة دراسة الجدوى | Abdulrahman Sarsak</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --bg-soft: #111827;
+      --card: #020617;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --danger: #f97373;
+      --border: #1f2937;
+      --radius: 18px;
+      --shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.75));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 16px;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4);
+      transition: all 0.15s ease-out;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(34,197,94,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(34,197,94,0.3);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-small {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.12), transparent 55%),
+                  var(--card);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      margin: 32px 0 10px;
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+    }
+
+    @media (max-width: 700px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    input:focus, select:focus {
+      outline: 1px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .results-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .result-card {
+      border-radius: 14px;
+      padding: 12px 10px;
+      border: 1px solid rgba(148,163,184,0.3);
+      background: linear-gradient(to bottom right, rgba(15,23,42,0.95), rgba(15,23,42,0.7));
+    }
+
+    .result-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JADWA PRO</div>
+    <nav>
+      <a href="#calc">ابدأ دراسة جدوى</a>
+      <a href="#">النماذج الجاهزة</a>
+      <a href="#">الأسعار</a>
+      <a href="#">تواصل معنا</a>
+    </nav>
+    <button class="btn-primary">ابدأ الآن</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="hero-badge">منصّة ذكية لإعداد دراسات الجدوى</div>
+        <h1 class="hero-title">أنجز دراسة الجدوى لمشروعك في دقائق بدلاً من أسابيع</h1>
+        <p>
+          أدخل افتراضات بسيطة عن الاستثمار، التكاليف والإيرادات، ودع النظام
+          يقوم بالحساب تلقائيًا لصافي الربح، فترة استرداد رأس المال، صافي القيمة الحالية، ومعدل العائد الداخلي.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">
+            ابدأ دراسة جديدة
+          </button>
+          <span class="hero-small">بدون تسجيل – نموذج تجريبي مجاني</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>ملخص سريع</h2>
+        <p class="hero-small">
+          أدخل بعض الأرقام التجريبية، وشاهد فورًا ما إذا كان مشروعك يبدو مجديًا ماليًا أم لا.
+        </p>
+        <ul style="font-size:0.8rem; color:var(--muted); padding-left:16px; margin-top:10px;">
+          <li>حساب آلي لفترة الاسترداد</li>
+          <li>صافي القيمة الحالية (NPV)</li>
+          <li>معدل العائد الداخلي (IRR)</li>
+          <li>توصية أولية بالمضي أو إعادة النظر</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="calc" class="card">
+      <h2>حاسبة دراسة الجدوى المبسّطة</h2>
+      <p class="hero-small" style="margin-bottom:16px;">
+        أدخل القيم التقديرية، ويمكنك تعديل النموذج لاحقًا لتفاصيل أكثر (ضرائب، إهلاك، قروض، إلخ).
+      </p>
+
+      <div class="section-title">1) بيانات أساسية</div>
+      <div class="form-grid">
+        <div>
+          <label>اسم المشروع</label>
+          <input id="projectName" type="text" placeholder="مثال: مغسلة ملابس بحي..." />
+        </div>
+        <div>
+          <label>مدة الدراسة (بالسنوات)</label>
+          <input id="years" type="number" value="5" min="1" />
+        </div>
+        <div>
+          <label>معدل الخصم / العائد المطلوب (%)</label>
+          <input id="discountRate" type="number" value="12" min="0" />
+        </div>
+        <div>
+          <label>نسبة نمو الإيرادات السنوية (%)</label>
+          <input id="growthRate" type="number" value="5" min="0" />
+        </div>
+      </div>
+
+      <div class="section-title">2) الاستثمار والتكاليف</div>
+      <div class="form-grid">
+        <div>
+          <label>إجمالي الاستثمار الابتدائي (رأس المال) – ريال</label>
+          <input id="investment" type="number" value="500000" min="0" />
+        </div>
+        <div>
+          <label>التكاليف التشغيلية السنوية – ريال</label>
+          <input id="annualCosts" type="number" value="200000" min="0" />
+        </div>
+      </div>
+
+      <div class="section-title">3) الإيرادات المتوقعة</div>
+      <div class="form-grid">
+        <div>
+          <label>عدد الوحدات/العملاء شهريًا</label>
+          <input id="monthlyUnits" type="number" value="800" min="0" />
+        </div>
+        <div>
+          <label>متوسط سعر البيع للوحدة – ريال</label>
+          <input id="unitPrice" type="number" value="40" min="0" />
+        </div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <button class="btn-primary" onclick="calculateFeasibility()">احسب الدراسة</button>
+      </div>
+
+      <div class="section-title">نتائج رئيسية</div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-label">صافي الربح السنوي (السنة الأولى)</div>
+          <div id="profitYear1" class="result-value">—</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">فترة استرداد رأس المال (تقريبية)</div>
+          <div id="payback" class="result-value">—</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">صافي القيمة الحالية NPV</div>
+          <div id="npv" class="result-value">—</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">معدل العائد الداخلي IRR (تقريبي)</div>
+          <div id="irr" class="result-value">—</div>
+        </div>
+      </div>
+
+      <div class="section-title">تقدير أولي لجدوى المشروع</div>
+      <p id="conclusion" class="hero-small">
+        أدخل الأرقام واضغط "احسب الدراسة" لعرض الاستنتاج.
+      </p>
+    </section>
+
+    <div class="footer">
+      © 2025  
+      <strong>عبد الرحمن سرسك | Abdulrahman Sarsak</strong><br>
+      منصة دراسة الجدوى – نسخة تجريبية
+    </div>
+  </main>
+
+  <script>
+    function formatCurrency(value) {
+      if (isNaN(value)) return "—";
+      return value.toLocaleString("ar-SA", {
+        maximumFractionDigits: 0
+      }) + " ريال";
+    }
+
+    function formatPercent(value) {
+      if (isNaN(value)) return "—";
+      return value.toFixed(1) + "٪";
+    }
+
+    function calculateNPV(rate, investment, cashFlows) {
+      let npv = -investment;
+      for (let t = 0; t < cashFlows.length; t++) {
+        npv += cashFlows[t] / Math.pow(1 + rate, t + 1);
+      }
+      return npv;
+    }
+
+    function calculateIRR(investment, cashFlows) {
+      let lower = -0.9;
+      let upper = 1.0;
+      let irr = null;
+
+      for (let i = 0; i < 60; i++) {
+        let mid = (lower + upper) / 2;
+        let npvMid = calculateNPV(mid, investment, cashFlows);
+
+        if (Math.abs(npvMid) < 1e-3) {
+          irr = mid;
+          break;
+        }
+
+        let npvLow = calculateNPV(lower, investment, cashFlows);
+
+        if (npvLow * npvMid <= 0) {
+          upper = mid;
+        } else {
+          lower = mid;
+        }
+      }
+
+      if (irr === null) {
+        irr = (lower + upper) / 2;
+      }
+
+      return irr * 100;
+    }
+
+    function calculateFeasibility() {
+      const years = parseFloat(document.getElementById("years").value) || 0;
+      const discountRate = (parseFloat(document.getElementById("discountRate").value) || 0) / 100;
+      const growthRate = (parseFloat(document.getElementById("growthRate").value) || 0) / 100;
+      const investment = parseFloat(document.getElementById("investment").value) || 0;
+      const annualCosts = parseFloat(document.getElementById("annualCosts").value) || 0;
+      const monthlyUnits = parseFloat(document.getElementById("monthlyUnits").value) || 0;
+      const unitPrice = parseFloat(document.getElementById("unitPrice").value) || 0;
+      const projectName = document.getElementById("projectName").value || "المشروع";
+
+      const revenueYear1 = monthlyUnits * unitPrice * 12;
+      const profitYear1 = revenueYear1 - annualCosts;
+
+      document.getElementById("profitYear1").textContent = formatCurrency(profitYear1);
+
+      let paybackYears = profitYear1 > 0 ? investment / profitYear1 : Infinity;
+      document.getElementById("payback").textContent =
+        paybackYears === Infinity ? "لا يسترد" : paybackYears.toFixed(1) + " سنة";
+
+      const cashFlows = [];
+      let currentRevenue = revenueYear1;
+
+      for (let t = 0; t < years; t++) {
+        const profit = currentRevenue - annualCosts;
+        cashFlows.push(profit);
+        currentRevenue *= (1 + growthRate);
+      }
+
+      const npv = calculateNPV(discountRate, investment, cashFlows);
+      document.getElementById("npv").textContent = formatCurrency(npv);
+
+      let irr = NaN;
+      if (cashFlows.some(v => v !== 0)) {
+        irr = calculateIRR(investment, cashFlows);
+      }
+
+      document.getElementById("irr").textContent = isNaN(irr)
+        ? "—"
+        : formatPercent(irr);
+
+      let conclusion = "";
+      if (profitYear1 <= 0) {
+        conclusion =
+          `وفقًا للمدخلات الحالية، يظهر أن ${projectName} لا يحقق صافي ربح إيجابي في السنة الأولى، ` +
+          `مما يشير إلى ضرورة إعادة النظر في نموذج التسعير أو تقليل التكاليف التشغيلية.`;
+      } else if (npv > 0 && irr > (discountRate * 100)) {
+        conclusion =
+          `المؤشرات الأولية تشير إلى أن ${projectName} مجدٍ اقتصاديًا؛ ` +
+          `حيث إن صافي القيمة الحالية موجب، ومعدل العائد الداخلي (${irr.toFixed(1)}٪) ` +
+          `أعلى من معدل الخصم المدخل. يمكن الانتقال إلى دراسة أكثر تفصيلًا (ضرائب، إهلاك، قروض...).`;
+      } else {
+        conclusion =
+          `النتائج الحالية متحفظة؛ صافي القيمة الحالية ${npv >= 0 ? "قريب من الصفر أو موجب بسيط" : "سالب"}، ` +
+          `ومعدل العائد الداخلي لا يتجاوز معدل الخصم بشكل مريح. ` +
+          `يوصى بتجربة سيناريوهات مختلفة لزيادة الإيرادات أو خفض التكاليف.`;
+      }
+
+      document.getElementById("conclusion").textContent = conclusion;
+    }
+  </script>
+</body>
+</html>
