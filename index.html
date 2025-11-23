@@ -192,6 +192,12 @@
       border-color: var(--accent);
     }
 
+    .helper {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
     .results-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -235,6 +241,13 @@
       font-size: 0.8rem;
       color: var(--muted);
     }
+
+    .calc-note {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -268,13 +281,13 @@
       <div class="card">
         <h2>ملخص سريع</h2>
         <p class="hero-small">
-          أدخل بعض الأرقام التجريبية، وشاهد فورًا ما إذا كان مشروعك يبدو مجديًا ماليًا أم لا.
+          استخدم هذه الأداة لتكوين انطباع أولي عن جدوى مشروعك قبل الدخول في دراسة تفصيلية.
         </p>
         <ul style="font-size:0.8rem; color:var(--muted); padding-left:16px; margin-top:10px;">
-          <li>حساب آلي لفترة الاسترداد</li>
-          <li>صافي القيمة الحالية (NPV)</li>
-          <li>معدل العائد الداخلي (IRR)</li>
-          <li>توصية أولية بالمضي أو إعادة النظر</li>
+          <li>تقدير الإيرادات والتكاليف السنوية</li>
+          <li>حساب فترة الاسترداد (Payback)</li>
+          <li>حساب صافي القيمة الحالية (NPV)</li>
+          <li>حساب معدل العائد الداخلي (IRR)</li>
         </ul>
       </div>
     </section>
@@ -282,55 +295,70 @@
     <section id="calc" class="card">
       <h2>حاسبة دراسة الجدوى المبسّطة</h2>
       <p class="hero-small" style="margin-bottom:16px;">
-        أدخل القيم التقديرية، ويمكنك تعديل النموذج لاحقًا لتفاصيل أكثر (ضرائب، إهلاك، قروض، إلخ).
+        أدخل القيم التقديرية، ويمكنك تعديلها أكثر لاحقًا في نسخة متقدمة (تفاصيل التكاليف، الضرائب، القروض، الإهلاك...).
       </p>
 
       <div class="section-title">1) بيانات أساسية</div>
       <div class="form-grid">
         <div>
           <label>اسم المشروع</label>
-          <input id="projectName" type="text" placeholder="مثال: مغسلة ملابس بحي..." />
+          <input id="projectName" type="text" placeholder="مثال: مشروع مغسلة في حي سكني" />
+          <div class="helper">اكتب اسم الفكرة أو النشاط، مثل: Laundry Express أو Coffee Spot.</div>
         </div>
         <div>
           <label>مدة الدراسة (بالسنوات)</label>
           <input id="years" type="number" value="5" min="1" />
+          <div class="helper">مدد شائعة: 3 أو 5 أو 7 سنوات حسب أفقك الاستثماري.</div>
         </div>
         <div>
           <label>معدل الخصم / العائد المطلوب (%)</label>
           <input id="discountRate" type="number" value="12" min="0" />
+          <div class="helper">يمثل عائدك المطلوب؛ في العادة بين 10 و 14 للمشاريع الصغيرة والمتوسطة.</div>
         </div>
         <div>
           <label>نسبة نمو الإيرادات السنوية (%)</label>
           <input id="growthRate" type="number" value="5" min="0" />
+          <div class="helper">نمو متوقّع في المبيعات؛ عادة 3–5 للمشاريع المستقرة، و 10–15 للمشاريع النامية.</div>
         </div>
       </div>
 
       <div class="section-title">2) الاستثمار والتكاليف</div>
       <div class="form-grid">
         <div>
-          <label>إجمالي الاستثمار الابتدائي (رأس المال) – ريال</label>
+          <label>إجمالي الاستثمار الابتدائي – ريال</label>
           <input id="investment" type="number" value="500000" min="0" />
+          <div class="helper">يشمل تكاليف التأسيس والتجهيزات ورأس المال التشغيلي للأشهر الأولى.</div>
         </div>
         <div>
           <label>التكاليف التشغيلية السنوية – ريال</label>
           <input id="annualCosts" type="number" value="200000" min="0" />
+          <div class="helper">جميع مصاريف التشغيل لسنة كاملة (إيجار، رواتب، فواتير، تسويق، صيانة...).</div>
         </div>
       </div>
 
       <div class="section-title">3) الإيرادات المتوقعة</div>
       <div class="form-grid">
         <div>
-          <label>عدد الوحدات/العملاء شهريًا</label>
+          <label>عدد العملاء/الوحدات شهريًا</label>
           <input id="monthlyUnits" type="number" value="800" min="0" />
+          <div class="helper">عدد المبيعات أو العملاء في الشهر؛ مثال: 800 أو 1500 عميل شهريًا.</div>
         </div>
         <div>
           <label>متوسط سعر البيع للوحدة – ريال</label>
           <input id="unitPrice" type="number" value="40" min="0" />
+          <div class="helper">متوسط ما يدفعه العميل للطلب الواحد؛ مثال: 15 أو 30 ريال.</div>
         </div>
       </div>
 
       <div style="margin-top:20px;">
         <button class="btn-primary" onclick="calculateFeasibility()">احسب الدراسة</button>
+      </div>
+
+      <div class="calc-note">
+        تعتمد الحاسبة على منطق مبسّط لحساب الإيرادات السنوية (Units × Price × 12)،
+        ثم طرح التكاليف السنوية للحصول على صافي الربح، وبناء التدفقات النقدية لسنوات الدراسة
+        واستخدام معدل الخصم لحساب NPV، وحساب IRR كنسبة تجعل NPV قريبًا من الصفر،
+        إضافة إلى تقدير فترة استرداد رأس المال بقسمة الاستثمار على صافي الربح السنوي.
       </div>
 
       <div class="section-title">نتائج رئيسية</div>
@@ -369,7 +397,7 @@
   <script>
     function formatCurrency(value) {
       if (isNaN(value)) return "—";
-      return value.toLocaleString("ar-SA", {
+      return value.toLocaleString("en-US", {
         maximumFractionDigits: 0
       }) + " ريال";
     }
